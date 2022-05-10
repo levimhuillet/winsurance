@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82614cbfefb619d419cf772c59718c20, type: 3}
+  m_Name: Obstacle
+  m_EditorClassIdentifier: 
+  Tiles:
+  - {fileID: 11400000, guid: 83e1f41f19c961b4fa882a02d51790b3, type: 2}
+  - {fileID: 11400000, guid: adb3d3b1a6355734bbfb617e4ca46260, type: 2}
+  m_walkType: 1
+  m_towerPlaceable: 0

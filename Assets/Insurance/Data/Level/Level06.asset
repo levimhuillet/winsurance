@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fe06dd20bd09a4c88f244e8eb2934a, type: 3}
+  m_Name: Level06
+  m_EditorClassIdentifier: 
+  levelID: level06
+  p_fire: 0.75
+  p_storm: 0
+  p_flood: 0.45
+  p_severe: 0.2
+  numButterflies: 5
+  gridArrayTA: {fileID: 4900000, guid: 6d3444dc0c65d034199db50e3110d75b, type: 3}
+  startFunds: 50
+  numPeriods: 6
+  periodFunds: 25
+  periodTime: 20
+  growthPerPeriod: 0.5
+  startHealth: 200
+  nexusHubsPos:
+  - {x: -4.5, y: 6.5}
+  - {x: 0, y: 0}
+  - {x: -4.5, y: -5.5}
+  presentMultiplier: 1.1
+  demonstrativeMultiplier: 1.3
+  stationPos: {x: 3.5, y: -4.5}
+  m_availableCoverages:
+  - Type: 0
+    Title: 'Flood Insurance
+
+      (low premium, high deductible)'
+    Premium: 4
+    Deductible: 4
+    MaxCoverage: 240
+    AutoRenew: 0
+  - Type: 0
+    Title: 'Flood Insurance
+
+      (high premium, low deductible)'
+    Premium: 8
+    Deductible: 1
+    MaxCoverage: 240
+    AutoRenew: 0
+  - Type: 1
+    Title: 'Fire Insurance
+
+      (low premium, high deductible)'
+    Premium: 6
+    Deductible: 4
+    MaxCoverage: 240
+    AutoRenew: 0
+  - Type: 1
+    Title: 'Fire Insurance
+
+      (high premium, low deductible)'
+    Premium: 12
+    Deductible: 2
+    MaxCoverage: 240
+    AutoRenew: 0
+  - Type: 3
+    Title: Umbrella Insurance
+    Premium: 10
+    Deductible: 0
+    MaxCoverage: 600
+    AutoRenew: 0
+  severeEffects:
+    BaseSize: 8
+    GrowthMult: 4
+    HealthBonusMult: 2
+    DamageBonusMult: 3

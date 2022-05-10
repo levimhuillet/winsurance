@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004c2a0bf3e76084488b1f1ce0881a17, type: 3}
+  m_Name: DeluvianNexus
+  m_EditorClassIdentifier: 
+  m_type: 2
+  m_growthRate: 0.22
+  m_incubationTime: 15
+  m_incubateSpeed: 0
+  m_returnSpeed: 2
+  m_dmgNormalization: 5
+  m_color: {r: 0.18045564, g: 0.46293673, b: 0.6981132, a: 1}

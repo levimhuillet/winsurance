@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Core/Scenes/Boot.unity
+    guid: 0213a6d6ed2af2b46a7fb207415c60eb
+  - enabled: 1
+    path: Assets/Core/Scenes/MainMenu.unity
+    guid: e40b982c49f154d45bbe868900f1500c
+  - enabled: 1
+    path: Assets/Insurance/Scenes/InfoScreen.unity
+    guid: fcca310febf917c42a10a8664970ce9e
+  - enabled: 1
+    path: Assets/Insurance/Scenes/LevelSelect.unity
+    guid: 6125f4abccc14eb41a5a2d23f6cf0946
+  - enabled: 1
+    path: Assets/Insurance/Scenes/Network/WaitingRoom.unity
+    guid: affc0e592b263684b9f6e09695c3d266
+  - enabled: 1
+    path: Assets/Insurance/Scenes/LevelHolder.unity
+    guid: eb7f1cf28929e7841914ab243a7eed4b
+  - enabled: 1
+    path: Assets/Insurance/Scenes/BummerLetter.unity
+    guid: 4dcda37558252b1488a67b283c33103c
+  - enabled: 0
+    path: Assets/Insurance/Scenes/Network/NetworkTest.unity
+    guid: 9d6d59953ce08b3479f0a07aab96fbb7
+  - enabled: 0
+    path: Assets/Core/Scenes/Samples/SampleScene.unity
+    guid: d9eba3bfc92cc2843a355dda331c01ad
+  m_configObjects: {}
