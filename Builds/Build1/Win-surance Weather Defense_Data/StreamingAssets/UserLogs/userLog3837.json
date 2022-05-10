@@ -1,0 +1,3 @@
+{"version":"0.0.1","datetime":"2022-05-09 22:11:02","epoch":1652152262059.0,"eventKey":"purchase-insurance-complete","levelID":"level07","userID":"3837","baseHealth":"100%","insuranceTowerRatio":"0","optimality":"0"}
+{"version":"0.0.1","datetime":"2022-05-09 22:11:10","epoch":1652152270213.0,"eventKey":"purchase-insurance-complete","levelID":"level07","userID":"3837","baseHealth":"100%","insuranceTowerRatio":"0","optimality":"0"}
+{"version":"0.0.1","datetime":"2022-05-09 22:11:21","epoch":1652152281186.0,"eventKey":"level-quit","levelID":"level07","userID":"3837","baseHealth":"100%","insuranceTowerRatio":"0.5","optimality":"0"}
