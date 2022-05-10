@@ -84,6 +84,18 @@ public class LevelManager : MonoBehaviour
 
     private int m_numOncomers;
 
+    #region Logging 
+
+    public enum PurchaseType
+    {
+        Insurance,
+        Tower
+    }
+
+    private int m_insuranceTotal, m_towerTotal;
+
+    #endregion // Logging
+
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -100,6 +112,7 @@ public class LevelManager : MonoBehaviour
         AudioManager.instance.PlayAudio("lark", true);
 
         m_numOncomers = 0;
+        m_towerTotal = m_insuranceTotal = 0;
 
         // Load LevelData
         LoadLevelData(GameDB.instance.GetLevelData(GameManager.instance.CurrLevelID));
@@ -311,12 +324,23 @@ public class LevelManager : MonoBehaviour
         return cost <= m_funds;
     }
 
-    public bool AttemptPurchase(int cost) {
+    public bool AttemptPurchase(int cost, PurchaseType purchaseType) {
         if (cost > m_funds) {
             return false;
         }
 
         ModifyFunds(-cost);
+        switch(purchaseType) {
+            case PurchaseType.Tower:
+                m_towerTotal += cost;
+                break;
+            case PurchaseType.Insurance:
+                m_insuranceTotal += cost;
+                break;
+            default:
+                break;
+        }
+
         return true;
     }
 
@@ -435,6 +459,20 @@ public class LevelManager : MonoBehaviour
 
     public string GetCurrLevelID() {
         return m_levelData.ID;
+    }
+
+    public string GetInsuranceTowerRatio() {
+        if (m_towerTotal == 0) {
+            if (m_insuranceTotal == 0) {
+                return "0";
+            }
+            else {
+                return "infinity";
+            }
+        }
+        else {
+            return ((float)m_insuranceTotal / m_towerTotal).ToString();
+        }
     }
 
     public bool TriggerConditionsMet(TutorialManager.SevereWeatherTrigger trigger) {

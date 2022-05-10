@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireSwatheNexus
   m_EditorClassIdentifier: 
   m_type: 1
-  m_growthRate: 0.25
+  m_growthRate: 0.5
   m_incubationTime: 6
   m_incubateSpeed: 0
   m_returnSpeed: 3

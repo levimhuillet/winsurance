@@ -39,12 +39,14 @@ MonoBehaviour:
     Deductible: 2
     MaxCoverage: 240
     AutoRenew: 0
+    IsOptimal: 1
   - Type: 1
     Title: Fire Insurance
     Premium: 3
     Deductible: 1
     MaxCoverage: 240
     AutoRenew: 0
+    IsOptimal: 1
   severeEffects:
     BaseSize: 8
     GrowthMult: 4

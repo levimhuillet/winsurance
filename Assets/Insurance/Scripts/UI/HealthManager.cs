@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthManager : MonoBehaviour {
+public class HealthManager : MonoBehaviour
+{
     public static HealthManager Instance;
 
     [SerializeField] bool DEBUGGING = false;
@@ -13,14 +14,16 @@ public class HealthManager : MonoBehaviour {
 
     #region Health Grouping
 
-    struct HealthGroup {
+    struct HealthGroup
+    {
         public float Base;
         public float Flood;
         public float Fire;
         public float Storm;
         public float Umbrella;
     }
-    struct AllHealth {
+    struct AllHealth
+    {
         public HealthGroup Curr;
         public HealthGroup Total;
     }
@@ -240,5 +243,14 @@ public class HealthManager : MonoBehaviour {
         return remainder;
     }
 
+
+    public string GetBaseHealthPercentage() {
+        if (m_allHealth.Total.Base == 0) {
+            return "100%";
+        }
+        else {
+            return (m_allHealth.Curr.Base / m_allHealth.Total.Base * 100).ToString() + '%';
+        }
+    }
     #endregion // Helper Methods
 }

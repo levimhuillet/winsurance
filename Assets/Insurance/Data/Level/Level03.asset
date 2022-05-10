@@ -39,6 +39,7 @@ MonoBehaviour:
     Deductible: 2
     MaxCoverage: 240
     AutoRenew: 0
+    IsOptimal: 1
   severeEffects:
     BaseSize: 7
     GrowthMult: 3

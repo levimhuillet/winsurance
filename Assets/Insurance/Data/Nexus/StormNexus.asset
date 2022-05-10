@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StormNexus
   m_EditorClassIdentifier: 
   m_type: 0
-  m_growthRate: 0.18
+  m_growthRate: 0.36
   m_incubationTime: 10
   m_incubateSpeed: 0
   m_returnSpeed: 2

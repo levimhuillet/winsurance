@@ -65,6 +65,12 @@ public class InsuranceManager : MonoBehaviour
     private float m_timerTime;
     private InsuranceSlider[] m_allSliders;
 
+    #region Logging 
+
+    private int m_numOptimal, m_numSuboptimal;
+
+    #endregion // Logging
+
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -108,7 +114,7 @@ public class InsuranceManager : MonoBehaviour
                 if (iSlider.Timer.TimeRemaining <= 0) {
                     if (m_currCoverageDicts.TypeDict[iSlider.Type].AutoRenew) {
                         // try pay coverage
-                        if (LevelManager.instance.AttemptPurchase((int)m_currCoverageDicts.TypeDict[iSlider.Type].Premium)) {
+                        if (LevelManager.instance.AttemptPurchase((int)m_currCoverageDicts.TypeDict[iSlider.Type].Premium, LevelManager.PurchaseType.Insurance)) {
                             InsuranceSlider slider = GetSliderByType(iSlider.Type);
 
                             // start timer
@@ -170,7 +176,7 @@ public class InsuranceManager : MonoBehaviour
             // check radial timer
             if (GetSliderByType(key).Timer.TimeRemaining == 0 || GetSliderByType(key).IsDirty) {
                 // insurance is new
-                if (LevelManager.instance.AttemptPurchase((int)m_currCoverageDicts.TypeDict[key].Premium)) {
+                if (LevelManager.instance.AttemptPurchase((int)m_currCoverageDicts.TypeDict[key].Premium, LevelManager.PurchaseType.Insurance)) {
                     InsuranceSlider slider = GetSliderByType(key);
                     // start timer
                     slider.Timer.Activate(m_timerTime);
@@ -179,6 +185,13 @@ public class InsuranceManager : MonoBehaviour
 
                     // reset insurance-level health
                     HealthManager.Instance.SetHealth(key, m_currCoverageDicts.TypeDict[key].MaxCoverage);
+
+                    if (m_currCoverageDicts.TypeDict[key].IsOptimal) {
+                        m_numOptimal++;
+                    }
+                    else {
+                        m_numSuboptimal++;
+                    }
                 }
                 else {
                     Debug.Log("not enough funds!");
@@ -194,7 +207,7 @@ public class InsuranceManager : MonoBehaviour
 
     public void PayForAllCoverages() {
         foreach (UIInsuranceMenu.InsuranceType key in m_currCoverageDicts.TypeDict.Keys) {
-            LevelManager.instance.AttemptPurchase((int)m_currCoverageDicts.TypeDict[key].Premium);
+            LevelManager.instance.AttemptPurchase((int)m_currCoverageDicts.TypeDict[key].Premium, LevelManager.PurchaseType.Insurance);
         }
     }
 
@@ -294,4 +307,18 @@ public class InsuranceManager : MonoBehaviour
     }
 
     #endregion // Event Handlers
+
+    public string GetOptimality() {
+        if (m_numSuboptimal == 0) {
+            if (m_numOptimal == 0) {
+                return "0";
+            }
+            else {
+                return "infinity";
+            }
+        }
+        else {
+            return (m_numOptimal / m_numSuboptimal).ToString();
+        }
+    }
 }

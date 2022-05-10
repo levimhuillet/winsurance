@@ -23,13 +23,16 @@ public class UIInsuranceMenu : MenuBase {
         public float MaxCoverage;
         [HideInInspector] public bool AutoRenew;
 
-        public Coverage(InsuranceType type, string title, float premium, float deductible, float maxCoverage, bool autoRenew) {
+        public bool IsOptimal; // used for logging purposes
+
+        public Coverage(InsuranceType type, string title, float premium, float deductible, float maxCoverage, bool autoRenew, bool isOptimal) {
             Type = type;
             Title = title;
             Premium = premium;
             Deductible = deductible;
             MaxCoverage = maxCoverage;
             AutoRenew = autoRenew;
+            IsOptimal = isOptimal;
         }
     }
 

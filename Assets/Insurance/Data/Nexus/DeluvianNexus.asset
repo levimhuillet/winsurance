@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeluvianNexus
   m_EditorClassIdentifier: 
   m_type: 2
-  m_growthRate: 0.22
+  m_growthRate: 0.44
   m_incubationTime: 15
   m_incubateSpeed: 0
   m_returnSpeed: 2

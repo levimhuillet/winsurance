@@ -63,7 +63,7 @@ public class TowerPlacementManager : MonoBehaviour
             Tower newTower = newTowerObj.GetComponent<Tower>();
             newTower.SetFields(targetTowerData);
 
-            LevelManager.instance.AttemptPurchase(targetTowerData.Cost);
+            LevelManager.instance.AttemptPurchase(targetTowerData.Cost, LevelManager.PurchaseType.Tower);
         }
         else {
             // TODO: handle full cell case

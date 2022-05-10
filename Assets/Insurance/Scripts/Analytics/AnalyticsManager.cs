@@ -37,22 +37,47 @@ public class AnalyticsManager : MonoBehaviour
     #region Event Handlers
 
     private void HandlePurchaseInsuranceComplete() {
-        WinsuranceAnalytics.ReportEvent(userID, "purchase-insurance-complete", LevelManager.instance.GetCurrLevelID(), "dummy-base-health", "dummy-ratio", "dummy-optimality");
+        WinsuranceAnalytics.ReportEvent(userID,
+            "purchase-insurance-complete",
+            LevelManager.instance.GetCurrLevelID(),
+            HealthManager.Instance.GetBaseHealthPercentage(),
+            LevelManager.instance.GetInsuranceTowerRatio(),
+            InsuranceManager.Instance.GetOptimality());
     }
     private void HandleLevelStart() {
-        WinsuranceAnalytics.ReportEvent(userID, "level-start", LevelManager.instance.GetCurrLevelID(), "n/a", "n/a", "n/a");
+        WinsuranceAnalytics.ReportEvent(userID,
+            "level-start",
+            LevelManager.instance.GetCurrLevelID(),
+            "n/a",
+            "n/a",
+            "n/a");
     }
 
     private void HandleDeath() {
-        WinsuranceAnalytics.ReportEvent(userID, "level-death", LevelManager.instance.GetCurrLevelID(), "dummy-base-health", "dummy-ratio", "dummy-optimality");
+        WinsuranceAnalytics.ReportEvent(userID,
+            "level-death",
+            LevelManager.instance.GetCurrLevelID(),
+            HealthManager.Instance.GetBaseHealthPercentage(),
+            LevelManager.instance.GetInsuranceTowerRatio(),
+            InsuranceManager.Instance.GetOptimality());
     }
 
     private void HandleLevelComplete() {
-        WinsuranceAnalytics.ReportEvent(userID, "level-complete", LevelManager.instance.GetCurrLevelID(), "dummy-base-health", "dummy-ratio", "dummy-optimality");
+        WinsuranceAnalytics.ReportEvent(userID,
+            "level-complete",
+            LevelManager.instance.GetCurrLevelID(),
+            HealthManager.Instance.GetBaseHealthPercentage(),
+            LevelManager.instance.GetInsuranceTowerRatio(),
+            InsuranceManager.Instance.GetOptimality());
     }
 
     private void HandleLevelQuit() {
-        WinsuranceAnalytics.ReportEvent(userID, "level-quit", LevelManager.instance.GetCurrLevelID(), "dummy-base-health", "dummy-ratio", "dummy-optimality");
+        WinsuranceAnalytics.ReportEvent(userID,
+            "level-quit",
+            LevelManager.instance.GetCurrLevelID(),
+            HealthManager.Instance.GetBaseHealthPercentage(),
+            LevelManager.instance.GetInsuranceTowerRatio(),
+            InsuranceManager.Instance.GetOptimality());
     }
 
     #endregion // Event Handlers

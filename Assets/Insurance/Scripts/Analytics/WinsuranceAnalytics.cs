@@ -45,7 +45,7 @@ public static class WinsuranceAnalytics
     private static string path;
     private static StreamWriter Writer = null;
 
-    public static void ReportEvent(string userId, string eventKey, string levelID, string baseHealth, string insuranceTowerRatio, string optimality)
+    public static void ReportEvent(string userId, string eventKey, string levelID, string baseHealthPercentage, string insuranceTowerRatio, string optimality)
     {
         if (!Directory.Exists(Application.streamingAssetsPath + "/UserLogs/")) {
             Directory.CreateDirectory(Application.streamingAssetsPath + "/UserLogs/");
@@ -55,7 +55,7 @@ public static class WinsuranceAnalytics
             Writer = new(path, true);
         }
 
-        Writer.WriteLine(JsonUtility.ToJson(new Report(userId, eventKey, levelID, baseHealth, insuranceTowerRatio, optimality)));
+        Writer.WriteLine(JsonUtility.ToJson(new Report(userId, eventKey, levelID, baseHealthPercentage, insuranceTowerRatio, optimality)));
         Writer.Flush();
     }
 
