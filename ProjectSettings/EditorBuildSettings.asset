@@ -18,17 +18,11 @@ EditorBuildSettings:
     path: Assets/Insurance/Scenes/LevelSelect.unity
     guid: 6125f4abccc14eb41a5a2d23f6cf0946
   - enabled: 1
-    path: Assets/Insurance/Scenes/Network/WaitingRoom.unity
-    guid: affc0e592b263684b9f6e09695c3d266
-  - enabled: 1
     path: Assets/Insurance/Scenes/LevelHolder.unity
     guid: eb7f1cf28929e7841914ab243a7eed4b
   - enabled: 1
     path: Assets/Insurance/Scenes/BummerLetter.unity
     guid: 4dcda37558252b1488a67b283c33103c
-  - enabled: 0
-    path: Assets/Insurance/Scenes/Network/NetworkTest.unity
-    guid: 9d6d59953ce08b3479f0a07aab96fbb7
   - enabled: 0
     path: Assets/Core/Scenes/Samples/SampleScene.unity
     guid: d9eba3bfc92cc2843a355dda331c01ad

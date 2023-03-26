@@ -4,8 +4,6 @@ Author: Levi Huillet
 
 Theme: Tower Defense
 
-Feature: Multiplayer Sync
-
 Learning Objectives: Insurance (why it's important and choosing the best plan for your situation)
 
 
@@ -31,11 +29,6 @@ Luckily, you can buy insurance. You have the option to insure under a company ca
 - Insurance is broken into premiums (paid every period) and deductibles (how much is paid out-of-pocket for each instance).
 - Player can choose whether to buy insurance
 
-## Multiplayer Aspects:
-
-- A lobby exists before each level begins. Up to 2 players can join. The host drives the loading of scenes.
-- Build1 and Build2 are included to facilitate running in local multiplayer
-
 ## Miscellaneous Mechanics:
 - Elements spawn out of Nexuses, which in turn spawn from Chaos Butterflies. Every butterfly that crosses the screen has a chance to instigate a Nexus pretty much anywhere, which grows and grows before moving to its designated spawn point. How many enemies a Nexus spawns depends on how much it grew during its growth stage.
 - Nexuses have a slight chance to be severe weather, which results in more, stronger oncoming elements.
@@ -44,7 +37,6 @@ Luckily, you can buy insurance. You have the option to insure under a company ca
 ## Future plans:
 - Tutorialize the game
 - Balancing. Some levels are ridiculously difficult, others ridiculously easy.
-- Allow multiple players to place towers in the same level
 	
 ## Analytics
 

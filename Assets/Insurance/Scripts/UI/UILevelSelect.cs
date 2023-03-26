@@ -86,7 +86,7 @@ public class UILevelSelect : MonoBehaviour {
 
     private void PrepareLevel(string levelID) {
         GameManager.instance.CurrLevelID = levelID;
-        SceneManager.LoadScene("WaitingRoom");
+        SceneManager.LoadScene("LevelHolder");
     }
 
     private void HandleReturn() {
