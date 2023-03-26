@@ -515,6 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -608,7 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_returnButton: {fileID: 32944239}
   m_colSpacing: 250
-  m_rowSpacing: 125
+  m_rowSpacing: 100
   m_numCols: 3
   m_levelButtonPrefab: {fileID: 8247726019137241821, guid: 98e2242604a79634aa795decaf7711d6, type: 3}
   m_buttonHolder: {fileID: 1840200604}

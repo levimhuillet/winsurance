@@ -1,11 +1,14 @@
 
+using Mono.Cecil;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Utils;
 
-public class TilemapManager : MonoBehaviour {
+public class TilemapManager : MonoBehaviour
+{
     public static TilemapManager instance;
 
     #region TileData
@@ -56,11 +59,11 @@ public class TilemapManager : MonoBehaviour {
         Vector3Int endGridPos = m_map.WorldToCell(m_destination.transform.position);
         Vector2Int endArrPos = new Vector2Int(endGridPos.x - (m_map.cellBounds.min.x), (m_map.cellBounds.max.y - 1) - endGridPos.y);
 
-        List<Vector2> shortestWaypoints = null;
+        List<Vector2Int> shortestWaypoints = null;
         List<Vector2> currWaypoints = new List<Vector2>();
 
         // TODO: Change this to A* shortest path algorithm for improved efficiency
-        CalculatePathHelper(
+        /*CalculatePathHelper(
             mapArray,
             startArrPos,
             new Vector2Int(endArrPos.x, endArrPos.y),
@@ -68,13 +71,155 @@ public class TilemapManager : MonoBehaviour {
             ref shortestWaypoints,
             movesDiagonal
             );
+        */
 
+        shortestWaypoints = AStarPath(startArrPos, endArrPos, mapArray, movesDiagonal);
 
         // convert wayPoints from arr to Tilemap
 
         List<Vector2> adjustedWaypoints = ConvertArrayPointsToMap(shortestWaypoints);
 
         return adjustedWaypoints;
+    }
+
+    private List<Vector2Int> AStarPath(Vector2Int start, Vector2Int end, int[,] mapArray, bool movesDiagonal) {
+        List<Vector2Int> finalPath = new List<Vector2Int>();
+
+        // The set of discovered nodes that may need to be (re-)expanded.
+        // Initially, only the start node is known.
+        // This is usually implemented as a min-heap or priority queue rather than a hash-set.
+        PriorityQueue<Vector2Int, float> openSet = new PriorityQueue<Vector2Int, float>();
+        List<Vector2Int> openSetKeys = new List<Vector2Int>();
+        openSet.Enqueue(start, 0);
+        openSetKeys.Add(start);
+
+        // For node n, cameFrom[n] is the node immediately preceding it on the cheapest path from start
+        // to n currently known.
+        Dictionary<Vector2Int, Vector2Int> cameFrom = new Dictionary<Vector2Int, Vector2Int>();
+
+        // For node n, gScore[n] is the cost of the cheapest path from start to n currently known.
+        Dictionary<Vector2Int, float> gScore = new Dictionary<Vector2Int, float>();
+        gScore[start] = 0;
+
+        // For node n, fScore[n] := gScore[n] + h(n). fScore[n] represents our current best guess as to
+        // how cheap a path could be from start to finish if it goes through n.
+        Dictionary<Vector2Int, float> fScore = new Dictionary<Vector2Int, float>();
+        fScore[start] = Heuristic(start, start);
+
+        while (openSet.Count > 0) {
+            Vector2Int current = openSet.Dequeue();
+            openSetKeys.Remove(current);
+            if (current == end) {
+                finalPath = ReconstructPath(cameFrom, current);
+                finalPath.Reverse();
+                return finalPath;
+            }
+
+            List<Vector2Int> connectedRoads = GetValidConnections(mapArray, current, movesDiagonal);
+            for (int r = 0; r < connectedRoads.Count; r++) {
+                Vector2Int neighbor = connectedRoads[r];
+                if (!gScore.ContainsKey(neighbor)) {
+                    gScore.Add(neighbor, int.MaxValue);
+                }
+                if (!fScore.ContainsKey(neighbor)) {
+                    fScore.Add(neighbor, int.MaxValue);
+                }
+                // d(current,neighbor) is the weight of the edge from current to neighbor
+                // tentative_gScore is the distance from start to the neighbor through current
+                float tentativeGScore = gScore[current] + Vector2.Distance(current, neighbor);
+                if (tentativeGScore < gScore[neighbor]) {
+                    // This path to neighbor is better than any previous one. Record it!
+                    cameFrom[neighbor] = current;
+                    gScore[neighbor] = tentativeGScore;
+                    float hNeighbor = Heuristic(start, neighbor);
+                    fScore[neighbor] = tentativeGScore + hNeighbor;
+                    if (!openSetKeys.Contains(neighbor)) {
+                        openSet.Enqueue(neighbor, hNeighbor);
+                        openSetKeys.Add(neighbor);
+                    }
+                }
+            }
+        }
+
+        return finalPath;
+    }
+
+    private float Heuristic(Vector2Int start, Vector2Int curr) {
+        // returns a lower value for closer to destination
+        return Vector2.Distance(start, curr);
+    }
+
+    private List<Vector2Int> ReconstructPath(Dictionary<Vector2Int, Vector2Int> cameFrom, Vector2Int current) {
+        List<Vector2Int> totalPath = new List<Vector2Int>();
+        totalPath.Add(current);
+        Debug.Log("[A*] Path reconstruct start with " + current);
+
+        while (cameFrom.Keys.Contains(current)) {
+            current = cameFrom[current];
+            totalPath.Add(current);
+            Debug.Log("[A*] Adding " + current);
+        }
+
+        Debug.Log("[A*] Path reconstructing finished with length " + totalPath.Count);
+
+        return totalPath;
+    }
+
+    private List<Vector2Int> GetValidConnections(int[,] mapArray, Vector2Int queryPos, bool movesDiagonal) {
+        List<Vector2Int> connections = new List<Vector2Int>();
+
+        // Recurse on the bottom cell
+        Vector2Int bottom = new Vector2Int(queryPos.x, queryPos.y + 1);
+        if (CanMove(bottom.y, bottom.x, mapArray)) {
+            connections.Add(bottom);
+        }
+
+        // Recurse on the top cell
+        Vector2Int top = new Vector2Int(queryPos.x, queryPos.y - 1);
+        if (CanMove(top.y, top.x, mapArray)) {
+            connections.Add(top);
+        }
+
+        // Recurse on the left cell
+        Vector2Int left = new Vector2Int(queryPos.x - 1, queryPos.y);
+        if (CanMove(left.y, left.x, mapArray)) {
+            connections.Add(left);
+        }
+
+        // Recurse on the right cell
+        Vector2Int right = new Vector2Int(queryPos.x + 1, queryPos.y);
+        if (CanMove(right.y, right.x, mapArray)) {
+            connections.Add(right);
+        }
+
+
+        if (movesDiagonal) {
+            // Recurse on the bottom-left cell
+            Vector2Int bl = new Vector2Int(queryPos.x - 1, queryPos.y + 1);
+            if (CanMove(bl.y, bl.x, mapArray)) {
+                connections.Add(bl);
+            }
+
+            // Recurse on the bottom-right cell
+            Vector2Int br = new Vector2Int(queryPos.x + 1, queryPos.y + 1);
+            if (CanMove(br.y, br.x, mapArray)) {
+                connections.Add(br);
+            }
+
+            // Recurse on the top-left cell
+            Vector2Int tl = new Vector2Int(queryPos.x - 1, queryPos.y - 1);
+            if (CanMove(tl.y, tl.x, mapArray)) {
+                connections.Add(tl);
+            }
+
+            // Recurse on the top-right cell
+            Vector2Int tr = new Vector2Int(queryPos.x + 1, queryPos.y - 1);
+            if (CanMove(tr.y, tr.x, mapArray)) {
+                connections.Add(tr);
+            }
+        }
+
+        return connections;
     }
 
     // returns true if end path was reached (or could be on shorter path), somewhere down the recursion, false otherwise
@@ -382,7 +527,7 @@ public class TilemapManager : MonoBehaviour {
         Debug.Log(sb.ToString());
     }
 
-    private List<Vector2> ConvertArrayPointsToMap(List<Vector2> waypoints) {
+    private List<Vector2> ConvertArrayPointsToMap(List<Vector2Int> waypoints) {
         List<Vector2> convertedPoints = new List<Vector2>();
 
         int adjustX = -m_map.cellBounds.min.x;

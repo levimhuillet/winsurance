@@ -56,7 +56,13 @@ public class Oncomer : MonoBehaviour {
     public void ManualAwake() {
         ApplyOncomerData();
 
-        CalculatePath();
+        if (CalculatePath()) {
+            gameObject.SetActive(true);
+        }
+        else {
+            Debug.Log("Warning: no path exists");
+            Destroy(this.gameObject);
+        }
 
         LevelManager.instance.RegisterOncomer();
     }
@@ -66,7 +72,13 @@ public class Oncomer : MonoBehaviour {
 
         ApplySevereEffects(severeEffects);
 
-        CalculatePath();
+        if (CalculatePath()) {
+            gameObject.SetActive(true);
+        }
+        else {
+            Debug.Log("Warning: no path exists");
+            Destroy(this.gameObject);
+        }
 
         LevelManager.instance.RegisterOncomer();
     }
@@ -143,13 +155,13 @@ public class Oncomer : MonoBehaviour {
         m_dmg *= (1 + effects.DamageBonusMult);
     }
 
-    private void CalculatePath() {
+    private bool CalculatePath() {
         m_currWaypointIndex = 0;
         List<Vector2> tryWaypoints = TilemapManager.instance.CalculatePath(m_canWalkOn, this.transform.position, m_movesDiagonal);
 
         if (tryWaypoints == null) {
             Debug.Log("No possible path!");
-            return;
+            return false;
         }
 
         m_waypoints = tryWaypoints;
@@ -161,6 +173,7 @@ public class Oncomer : MonoBehaviour {
             }
             m_debugHolder.transform.parent = null;
         }
+        return true;
     }
 
     #region Projectile

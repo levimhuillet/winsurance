@@ -136,6 +136,8 @@ public class LevelManager : MonoBehaviour
         // begin level at insurance phase
         m_phase = GamePhase.Insurance;
         InsuranceManager.Instance.OpenOptionsMenu();
+
+        EventManager.OnReturnLevelSelect.AddListener(delegate { SceneManager.LoadScene("LevelSelect"); });
     }
 
     private void LoadLevelData(LevelData data) {
@@ -419,6 +421,7 @@ public class LevelManager : MonoBehaviour
 
     private void InstantiateDebugOncomer(Nexus.Type nexusType) {
         GameObject oncomerObj = Instantiate(m_oncomerPrefab);
+        oncomerObj.SetActive(false);
         oncomerObj.transform.position = TilemapManager.instance.GetNexusHubTransform(nexusType).position;
         Oncomer oncomer = oncomerObj.GetComponent<Oncomer>();
 

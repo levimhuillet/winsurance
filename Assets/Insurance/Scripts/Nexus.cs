@@ -144,6 +144,7 @@ public class Nexus : MonoBehaviour
         for (int i = 0; i < numSpawns; ++i) {
 
             GameObject oncomerObj = Instantiate(m_oncomerPrefab);
+            oncomerObj.SetActive(false);
             Vector3 spawnSpread = new Vector3(leftBound + step * i, 0, 0);
             oncomerObj.transform.position = this.transform.position + spawnSpread;
             Oncomer oncomer = oncomerObj.GetComponent<Oncomer>();
