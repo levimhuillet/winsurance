@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LarkAscending
   m_EditorClassIdentifier: 
   m_id: lark
-  m_clip: {fileID: 8300000, guid: 01d737cab9d5ea54ea643ec4e6245682, type: 3}
+  m_clip: {fileID: 8300000, guid: 0d60f1259f242bb489c713648557647a, type: 3}
   m_volume: 1
   m_pan: 0

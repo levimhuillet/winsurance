@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b6354afca06d748a3d80dec2e25964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debugPath: 1
+  m_debugPath: 0
   m_debugPrefab: {fileID: 656166759001015774, guid: 8a6c11c95690b114587d89165e401fd7, type: 3}
   m_debugHolder: {fileID: 8310328431762939593}
   m_type: 3
