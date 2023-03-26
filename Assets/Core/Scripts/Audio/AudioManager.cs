@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Central audio player in the game.
@@ -49,6 +50,10 @@ public class AudioManager : MonoBehaviour, IAudioPlayer {
 
         m_audioSrc = this.GetComponent<AudioSource>();
         m_audioQueue = new Queue<AudioLoopPair>();
+    }
+
+    private void Start() {
+        EventManager.OnReturnLevelSelect.AddListener(StopAudio);
     }
 
     private void Update() {
